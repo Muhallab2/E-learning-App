@@ -25,3 +25,5 @@ def update_config(key, value):
 if __name__ == "__main__":
     update_config("course_version", "1.2.0")
     update_config("ui_theme", "dark_mode")
+    update_config("enable_notifications", "true")
+    update_config("default_language", "en")
