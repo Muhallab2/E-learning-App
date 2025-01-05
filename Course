@@ -1,0 +1,27 @@
+import json
+
+def log_change(change):
+    with open("config_changes.log", "a") as log:
+        log.write(f"{change}\n")
+
+def load_config(file="config.json"):
+    try:
+        with open(file, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def save_config(config, file="config.json"):
+    with open(file, "w") as f:
+        json.dump(config, f, indent=4)
+
+def update_config(key, value):
+    config = load_config()
+    old_value = config.get(key)
+    config[key] = value
+    save_config(config)
+    log_change(f"Updated '{key}': {old_value} -> {value}")
+
+if __name__ == "__main__":
+    update_config("course_version", "1.2.0")
+    update_config("ui_theme", "dark_mode")
